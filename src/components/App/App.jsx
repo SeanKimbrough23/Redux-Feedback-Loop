@@ -3,6 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { HashRouter as Router, Route } from "react-router-dom";
 import axios from "axios";
 import "./App.css";
+import FeelingForm from "../FeelingForm/FeelingForm";
+import ThankYouFeedback from "../ThankYouFeedback/ThankYouFeedback";
+import UnderstandingForm from "../UnderstandingForm/UnderstandingForm";
+import SupportedForm from "../SupportedForm/SupportedForm";
+import CommentsForm from "../CommentsForm/CommentsForm";
+import Admin from "../Admin/Admin";
 
 function App() {
   const dispatch = useDispatch();
@@ -32,7 +38,6 @@ function App() {
           <Admin />
         </Route>
       </Router>
-      ;
     </div>
   );
 }

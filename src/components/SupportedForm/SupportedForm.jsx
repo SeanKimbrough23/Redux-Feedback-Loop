@@ -22,7 +22,7 @@ const SupportedForm = () => {
   };
 
   const handleChange = (event) => {
-    if (feeling + event.target.value <= 5 && event.target.value >= 0) {
+    if (supported + event.target.value <= 5 && event.target.value >= 0) {
       setSupported(event.target.value);
     }
   };
