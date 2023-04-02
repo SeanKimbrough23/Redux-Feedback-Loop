@@ -1,6 +1,7 @@
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Button } from "@mui/material";
 
 const SupportedForm = () => {
   const [supported, setSupported] = useState("");
@@ -10,7 +11,7 @@ const SupportedForm = () => {
   const handleClick = () => {
     console.log("inside supportedFrom", handleClick);
     if (supported != "") {
-      dispath({
+      dispatch({
         type: "SET_SUPPORTED",
         payload: supported,
       });
@@ -28,11 +29,19 @@ const SupportedForm = () => {
   };
   return (
     <>
-      <div className="button-container">
+      <section className="question__section">
+        <h1 className="question-header">How well are you being supported?</h1>
+        <label className="question-label">Support?</label>
+        <input
+          className="question-input"
+          value={supported}
+          onChange={(event) => setSupported(Number(event.target.value))}
+          type="number"
+        />
         <Button onClick={handleClick} variant="filled">
           Next
         </Button>
-      </div>
+      </section>
     </>
   );
 };

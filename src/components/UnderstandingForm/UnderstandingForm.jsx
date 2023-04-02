@@ -1,6 +1,7 @@
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Button } from "@mui/material";
 
 const UnderstandingForm = () => {
   const [understanding, setUnderstanding] = useState("");
@@ -10,7 +11,7 @@ const UnderstandingForm = () => {
   const handleClick = () => {
     console.log("inside understandingform handleclick", handleClick);
     if (understanding != "") {
-      dispath({
+      dispatch({
         type: "SET_UNDERSTANDING",
         payload: understanding,
       });
@@ -22,17 +23,27 @@ const UnderstandingForm = () => {
   };
 
   const handleChange = (event) => {
-    if (feeling + event.target.value <= 5 && event.target.value >= 0) {
+    if (understanding + event.target.value <= 5 && event.target.value >= 0) {
       setUnderstanding(event.target.value);
     }
   };
   return (
     <>
-      <div className="button-container">
+      <section className="question__section">
+        <h1 className="question-header">
+          How well are you understanding the content?
+        </h1>
+        <label className="question-label">Understanding?</label>
+        <input
+          className="question-input"
+          value={understanding}
+          onChange={(event) => setUnderstanding(Number(event.target.value))}
+          type="number"
+        />
         <Button onClick={handleClick} variant="filled">
           Next
         </Button>
-      </div>
+      </section>
     </>
   );
 };

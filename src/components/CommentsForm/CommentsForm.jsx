@@ -1,6 +1,7 @@
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Button } from "@mui/material";
 
 const CommentsForm = () => {
   const [comments, setComments] = useState("");
@@ -8,14 +9,14 @@ const CommentsForm = () => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    console.log("inside CommentsFrom", handleClick);
+    console.log("inside CommentsForm", handleClick);
     if (comments != "") {
-      dispath({
+      dispatch({
         type: "SET_COMMENTS",
         payload: comments,
       });
       setComments("");
-      history.push("/");
+      history.push("/thankyou");
     } else {
       alert("Please select a number");
     }
@@ -28,15 +29,23 @@ const CommentsForm = () => {
   };
   return (
     <>
-      <div className="button-container">
+      <section className="question__section">
+        <h1 className="question-header">Any Comments you want to leave?</h1>
+        <label className="question-label">Comments?</label>
+        <input
+          className="question-input"
+          value={comments}
+          onChange={(event) => setComments(event.target.value)}
+          type="text"
+        />
         <Button onClick={handleClick} variant="filled">
           Next
         </Button>
-      </div>
+      </section>
     </>
   );
 };
 
 export default CommentsForm;
 
-// Page 5
+// Page 4

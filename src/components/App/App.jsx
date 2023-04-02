@@ -20,18 +20,23 @@ function App() {
       </header>
       <Router>
         <Route path="/" exact>
+          {/* Page 1 */}
           <FeelingForm />
         </Route>
         <Route path="/understanding" exact>
+          {/* Page 2 */}
           <UnderstandingForm />
         </Route>
         <Route path="/supported" exact>
+          {/* Page 3 */}
           <SupportedForm />
         </Route>
         <Route path="/comments" exact>
+          {/* Page 4 */}
           <CommentsForm />
         </Route>
         <Route path="/thankyou" exact>
+          {/* Page 5 */}
           <ThankYouFeedback />
         </Route>
         <Route path="/admin" exact>

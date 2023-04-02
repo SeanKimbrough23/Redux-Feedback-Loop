@@ -1,6 +1,7 @@
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Button } from "@mui/material";
 
 const ThankYouFeedback = () => {
   const [thankyou, setThankYou] = useState(0);
@@ -15,7 +16,7 @@ const ThankYouFeedback = () => {
         payload: thankyou,
       });
       setThankYou("");
-      history.push("/comments");
+      history.push("/admin");
     } else {
       alert("Please select a number");
     }
@@ -28,15 +29,23 @@ const ThankYouFeedback = () => {
   };
   return (
     <>
-      <div className="button-container">
+      <section className="question__section">
+        <h1 className="question-header">THANK YOU!</h1>
+        <label className="question-label">ThankYou?</label>
+        <input
+          className="question-input"
+          value={thankyou}
+          onChange={(event) => setThankYou(Number(event.target.value))}
+          type="number"
+        />
         <Button onClick={handleClick} variant="filled">
           Next
         </Button>
-      </div>
+      </section>
     </>
   );
 };
 
 export default ThankYouFeedback;
 
-// Page 4
+// Page 5
