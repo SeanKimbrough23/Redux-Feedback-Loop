@@ -10,7 +10,7 @@ const ThankYouFeedback = () => {
 
   const handleClick = () => {
     console.log("inside ThankYouFeedback handleclick", handleClick);
-    history.push("/welcome");
+    history.push("/");
   };
   // const handleChange = (event) => {
   //   if (thankyou + event.target.value <= 5 && event.target.value >= 0) {

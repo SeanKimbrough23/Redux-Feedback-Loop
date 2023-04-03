@@ -11,13 +11,31 @@
 }
 
 .App-title {
-  font-size: 2em;
+  font-size: 5em;
 }
 
 .App-intro {
-  font-size: large;
+  font-size: 3em;
 }
 
 h4 {
   font-style: italic;
+  font-size: large;
+}
+.question_section {
+  font-style: italic;
+  color: blue;
+}
+
+body {
+  background-color: bisque;
+}
+.Button-submit {
+  font-weight: bold;
+  background-color: #ff6f00;
+  border: 2px solid #ff6f00;
+  color: white;
+  padding: 10px 20px;
+  margin-top: 20px;
+  border-radius: 4px;
 }

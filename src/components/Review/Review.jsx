@@ -82,7 +82,9 @@ function Review() {
           ))}
         </tbody>
       </table>
-      <Button onClick={handleSubmit}>Submit</Button>
+      <Button className="Button-submit" onClick={handleSubmit}>
+        Submit
+      </Button>
     </section>
   );
 }

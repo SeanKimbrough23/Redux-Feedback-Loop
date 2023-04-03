@@ -21,7 +21,7 @@ function App() {
         <h4>Don't forget it!</h4>
       </header>
       <Router>
-        <Route path="/welcome" exact>
+        <Route path="/" exact>
           {/* Page 1 */}
           <Welcome />
         </Route>
