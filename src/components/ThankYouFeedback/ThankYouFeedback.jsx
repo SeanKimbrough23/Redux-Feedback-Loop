@@ -10,18 +10,8 @@ const ThankYouFeedback = () => {
 
   const handleClick = () => {
     console.log("inside ThankYouFeedback handleclick", handleClick);
-    if (thankyou != "") {
-      dispatch({
-        type: "SET_THANKYOUFEEDBACK",
-        payload: thankyou,
-      });
-      setThankYou("");
-      history.push("/");
-    } else {
-      alert("Please select a number");
-    }
+    history.push("/welcome");
   };
-
   // const handleChange = (event) => {
   //   if (thankyou + event.target.value <= 5 && event.target.value >= 0) {
   //     setThankYou(event.target.value);
