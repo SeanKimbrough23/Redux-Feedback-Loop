@@ -7,7 +7,18 @@ function Welcome() {
   const handleStart = () => {
     history.push("/feeling");
   };
-  return <Button onClick={handleStart}>Start</Button>;
+  return (
+    <>
+      <section className="question__section">
+        <h1 className="question-header">
+          Please answer the following questions using 1-5
+          <p>5 being Very Well, 1</p>
+          being Not At All
+        </h1>
+        <Button onClick={handleStart}>Start</Button>
+      </section>
+    </>
+  );
 }
 
 export default Welcome;
