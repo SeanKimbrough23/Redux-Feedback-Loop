@@ -21,9 +21,9 @@ const FeelingForm = () => {
     }
   };
 
-  const handleChange = (event) => {
-    if (feeling + event.target.value <= 5 && event.target.value >= 0) {
-      setFeeling(event.target.value);
+  const handleChange = () => {
+    if (feeling < 1 || feeling > 6 || !feeling) {
+      alert("Please provide an answer between 1 and 6");
     }
   };
   return (

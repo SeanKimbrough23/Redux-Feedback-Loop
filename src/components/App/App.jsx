@@ -38,9 +38,11 @@ function App() {
           <SupportedForm />
         </Route>
         <Route path="/comments" exact>
+          {/* Page 6 */}
           <CommentsForm />
         </Route>
         <Route path="/thankyou" exact>
+          {/* page 7 */}
           <ThankYouFeedback />
         </Route>
         <Route path="/review" exact>

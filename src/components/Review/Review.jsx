@@ -1,78 +1,46 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { Button } from "@mui/material";
+import Button from "@mui/material/Button";
 
 function Review() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const answers = useSelector((state) => state.answers);
+  const [editing, setEditing] = useState("");
+  const [newAnswer, setNewAnswer] = useState("");
 
-  const answers = useSelector((store) => store.answers); // redux reducer
-
-  const [questionToEdit, setQuestionToEdit] = useState(""); // keeps track of what question is being edited ("" if not editing)
-  const [newAnswer, setNewAnswer] = useState(""); // local state to track edit input
-
-  const findInputType = (question) => {
+  const handleFinish = useCallback(() => {
+    const answer = answers[editing];
     if (
-      question === "feeling" ||
-      question === "understanding" ||
-      question === "support"
+      editing === "feeling" ||
+      editing === "understanding" ||
+      editing === "support"
     ) {
-      return "number";
-    } else if (question === "comments") {
-      return "text";
-    } else {
-      console.log("Something wrong finding input");
+      if (newAnswer < 1 || newAnswer > 6 || !newAnswer) {
+        alert("Please provide an answer between 1 and 6");
+        return;
+      }
     }
-  };
-  // Helper function for conditionally rendering an edit field
-  const renderEditField = (question) => {
-    return (
-      <input
-        type={findInputType(question)}
-        value={newAnswer}
-        onChange={(event) => setNewAnswer(event.target.value)}
-      />
-    );
-  };
-  const handleFinish = () => {
-    // validating edited input
-    switch (questionToEdit) {
-      case "feeling":
-      case "understanding":
-      case "support":
-        if (newAnswer < 1 || newAnswer > 6 || !newAnswer) {
-          alert("Please provide an answer between 1 and 6");
-          return;
-        }
-    }
-
     dispatch({
       type: "UPDATE_ANSWER",
-      payload: { question: questionToEdit, answer: newAnswer },
+      payload: { question: editing, answer: newAnswer },
     });
+    setEditing("");
+  }, [answers, dispatch, editing, newAnswer]);
 
-    // clear inputs
-    setQuestionToEdit("");
-    setNewAnswer("");
-  };
-
-  /**
-   * Posts user feedback to server side
-   * On success, resets answer reducer, goes to next page
-   */
-  const handleSubmit = () => {
+  const handleSubmit = useCallback(() => {
     axios
       .post("/feedback", answers)
-      .then(() => {
+      .then((results) => {
         dispatch({ type: "CLEAR_ANSWERS" });
-        history.push("/thankyou");
+        history.push("/comments");
       })
       .catch((error) => {
-        console.log("Error POST /feedback", error);
+        console.log("Error POST 🙃/feedback", error);
       });
-  };
+  }, [answers, dispatch, history]);
 
   return (
     <section>
@@ -85,32 +53,38 @@ function Review() {
           </tr>
         </thead>
         <tbody>
-          {Object.keys(answers).map((question, i) => {
-            const answer = answers[question];
-            const isEdit = question === questionToEdit;
-
-            return (
-              <tr key={i}>
-                <td>{question}</td>
-                <td>{isEdit ? renderEditField(question) : answer}</td>
-                <td>
-                  {isEdit ? (
-                    <Button onClick={handleFinish}> Done </Button>
-                  ) : (
-                    <Button onClick={() => setQuestionToEdit(question)}>
-                      Edit
-                    </Button>
-                  )}
-                </td>
-              </tr>
-            );
-          })}
+          {Object.entries(answers).map(([question, answer]) => (
+            <tr key={question}>
+              <td>{question}</td>
+              <td>
+                {editing === question ? (
+                  <input
+                    type={
+                      ["feeling", "understanding", "support"].includes(question)
+                        ? "number"
+                        : "text"
+                    }
+                    value={newAnswer}
+                    onChange={(event) => setNewAnswer(event.target.value)}
+                  />
+                ) : (
+                  answer
+                )}
+              </td>
+              <td>
+                {editing === question ? (
+                  <Button onClick={handleFinish}>Done</Button>
+                ) : (
+                  <Button onClick={() => setEditing(question)}>Edit</Button>
+                )}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
-      <button onClick={handleSubmit}>Submit</button>
+      <Button onClick={handleSubmit}>Submit</Button>
     </section>
   );
 }
 
 export default Review;
-// Page 5
