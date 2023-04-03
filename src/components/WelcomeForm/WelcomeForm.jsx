@@ -12,7 +12,7 @@ function Welcome() {
       <section className="question__section">
         <h1 className="question-header">
           Please answer the following questions using 1-5
-          <p>5 = Very Well</p>1 = Not At All
+          <p>5 = Very Well</p>0 = Not At All
         </h1>
         <Button onClick={handleStart}>Start</Button>
       </section>
