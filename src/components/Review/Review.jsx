@@ -3,6 +3,7 @@ import { useState, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Button from "@mui/material/Button";
+import { Typography } from "@mui/material";
 
 function Review() {
   const dispatch = useDispatch();
@@ -42,50 +43,26 @@ function Review() {
       });
   }, [answers, dispatch, history]);
 
+  const handleBack = () => {
+    history.push("/comments");
+  };
   return (
-    <section>
-      <table>
-        <thead>
-          <tr>
-            <th>Question</th>
-            <th>Answer</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {Object.entries(answers).map(([question, answer]) => (
-            <tr key={question}>
-              <td>{question}</td>
-              <td>
-                {editing === question ? (
-                  <input
-                    type={
-                      ["feeling", "understanding", "support"].includes(question)
-                        ? "number"
-                        : "text"
-                    }
-                    value={newAnswer}
-                    onChange={(event) => setNewAnswer(event.target.value)}
-                  />
-                ) : (
-                  answer
-                )}
-              </td>
-              <td>
-                {editing === question ? (
-                  <Button onClick={handleFinish}>Done</Button>
-                ) : (
-                  <Button onClick={() => setEditing(question)}>Edit</Button>
-                )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <Button className="Button-submit" onClick={handleSubmit}>
-        Submit
-      </Button>
-    </section>
+    <>
+      <div>
+        <Typography>Feelings: {answers.feeling}</Typography>
+        <Typography>Understanding: {answers.understanding}</Typography>
+        <Typography>Support: {answers.supported}</Typography>
+        <Typography>Comments: {answers.comments}</Typography>
+      </div>
+      <div>
+        <Button className="Button-back" onClick={handleBack}>
+          Back
+        </Button>
+        <Button className="Button-submit" onClick={handleSubmit}>
+          Submit
+        </Button>
+      </div>
+    </>
   );
 }
 
