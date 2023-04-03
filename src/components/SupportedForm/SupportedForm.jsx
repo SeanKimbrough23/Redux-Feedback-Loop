@@ -16,7 +16,7 @@ const SupportedForm = () => {
         payload: supported,
       });
       setSupported("");
-      history.push("/thankyou");
+      history.push("/review");
     } else {
       alert("Please select a number");
     }
@@ -48,4 +48,4 @@ const SupportedForm = () => {
 
 export default SupportedForm;
 
-// Page 3
+// Page 4

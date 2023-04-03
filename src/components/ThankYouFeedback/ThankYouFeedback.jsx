@@ -11,35 +11,35 @@ const ThankYouFeedback = () => {
   const handleClick = () => {
     console.log("inside ThankYouFeedback handleclick", handleClick);
     if (thankyou != "") {
-      dispath({
+      dispatch({
         type: "SET_THANKYOUFEEDBACK",
         payload: thankyou,
       });
       setThankYou("");
-      history.push("/admin");
+      history.push("/");
     } else {
       alert("Please select a number");
     }
   };
 
-  const handleChange = (event) => {
-    if (thankyou + event.target.value <= 5 && event.target.value >= 0) {
-      setThankYou(event.target.value);
-    }
-  };
+  // const handleChange = (event) => {
+  //   if (thankyou + event.target.value <= 5 && event.target.value >= 0) {
+  //     setThankYou(event.target.value);
+  //   }
+  // };
   return (
     <>
       <section className="question__section">
         <h1 className="question-header">THANK YOU!</h1>
-        <label className="question-label">ThankYou?</label>
-        <input
+        {/* <label className="question-label">Leave New Feedback</label> */}
+        {/* <input
           className="question-input"
           value={thankyou}
-          onChange={(event) => setThankYou(Number(event.target.value))}
-          type="number"
-        />
+          onChange={(event) => setThankYou(event.target.value)}
+          type=""
+        /> */}
         <Button onClick={handleClick} variant="filled">
-          Next
+          Leave New Feedback
         </Button>
       </section>
     </>
@@ -48,4 +48,4 @@ const ThankYouFeedback = () => {
 
 export default ThankYouFeedback;
 
-// Page 5
+// Page 6
