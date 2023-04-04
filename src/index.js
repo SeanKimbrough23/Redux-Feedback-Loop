@@ -18,6 +18,8 @@ const answers = (state = {}, action) => {
       return {};
     default:
       return state;
+    case "SET_COMMENTS":
+      return newState;
   }
 };
 
